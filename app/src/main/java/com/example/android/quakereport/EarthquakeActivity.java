@@ -15,9 +15,12 @@
  */
 package com.example.android.quakereport;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.widget.ArrayAdapter;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -32,24 +35,38 @@ public class EarthquakeActivity extends AppCompatActivity {
         setContentView(R.layout.earthquake_activity);
 
         // Create a fake list of earthquake locations.
-        ArrayList<String> earthquakes = new ArrayList<>();
-        earthquakes.add("San Francisco");
-        earthquakes.add("London");
-        earthquakes.add("Tokyo");
-        earthquakes.add("Mexico City");
-        earthquakes.add("Moscow");
-        earthquakes.add("Rio de Janeiro");
-        earthquakes.add("Paris");
+        final ArrayList<Earthquake> earthquakes = new ArrayList<>(QueryUtils.extractEarthquakes());
 
         // Find a reference to the {@link ListView} in the layout
         ListView earthquakeListView = (ListView) findViewById(R.id.list);
 
-        // Create a new {@link ArrayAdapter} of earthquakes
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(
-                this, android.R.layout.simple_list_item_1, earthquakes);
+        //initialize itemsAdapter using places ArrayList
+        EarthquakeAdapter adapter = new EarthquakeAdapter(this, earthquakes);
 
-        // Set the adapter on the {@link ListView}
-        // so the list can be populated in the user interface
+        //set the adapter for listView (which is "list" view in the applicable xml) to itemsView using places
         earthquakeListView.setAdapter(adapter);
+
+        /**
+         *  Set on item click listener block
+         *  Creates Variable of clicked item, assigns intent values and starts activity
+         */
+        earthquakeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                Earthquake selectedEarthquake = earthquakes.get(i);
+                String earthquakeURL = selectedEarthquake.getMyURL();
+
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(earthquakeURL));
+
+                // Create a new intent to open the {@link applicable activity}
+                Intent myIntent = new Intent(browserIntent);
+
+                // Start the new activity
+                startActivity(myIntent);
+
+            }
+        }); // END setOnItemClickListener
+
     }
 }
