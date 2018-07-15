@@ -13,10 +13,11 @@ class Earthquake {
 
     /**
      * Constructs a new {@link Earthquake} object.
-     * @param locationInput  place of occurence
-     * @param timeInput time in unixe long format
-     * @param magInput mag of quake
-     * @param urlInput web link
+     *
+     * @param locationInput place of occurence
+     * @param timeInput     time in unixe long format
+     * @param magInput      mag of quake
+     * @param urlInput      web link
      */
     public Earthquake(String locationInput, long timeInput, double magInput, String urlInput) {
         myLocation = locationInput;
@@ -30,7 +31,7 @@ class Earthquake {
         myLocation = locationInput;
     }
 
-    public void setMyTime (long timeInput) {
+    public void setMyTime(long timeInput) {
         myTime = timeInput;
     }
 
@@ -48,7 +49,7 @@ class Earthquake {
     }
 
     //Gets the second word
-    public long getMyTime () {
+    public long getMyTime() {
         return myTime;
     }
 
