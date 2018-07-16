@@ -20,4 +20,6 @@
     <string name="sample_long_text">Long placeholder location that should wrap to more than 2 lines of text</string>
     <string name="sample_distance_from">30km S of</string>
     <string name="sample_mag">8.9</string>
+    <string name="no_data_text">No Data to display from the server.</string>
+    <string name="no_internet_text">There is no internet connection.</string>
 </resources>
